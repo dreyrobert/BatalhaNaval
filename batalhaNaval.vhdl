@@ -10,15 +10,13 @@ entity batalhaNaval is
         naviosPosicionados : out std_logic_vector(1 downto 0);
         vidas: out std_logic_vector(5 downto 0);
         ganhou : out std_logic;
-        perdeu : out std_logic;
-        teste : out std_logic_vector(3 downto 0)
+        perdeu : out std_logic
     );
 end batalhaNaval;
 
 architecture arch of batalhaNaval is
     type tipoEstado is (primeiroNavio, segundoNavio, jogadas, fimJogo);
     signal y : tipoEstado;
-    signal codificacao : std_logic_vector(3 downto 0);
     signal pos_primeiroNavio : std_logic_vector(3 downto 0);
     signal pos_segundoNavio : std_logic_vector(3 downto 0);
     signal tentativas : integer range 0 to 6 := 0;
@@ -58,20 +56,10 @@ begin
                         y <= segundoNavio;
                     end if;
                 when jogadas =>
-
-                    -- Codificacao
-            codificacao(0) <= (not entradas(0) and not entradas(1) and not entradas(2)) or (not entradas(1) and entradas(3)) or (not entradas(0) and entradas(1) and entradas(2) and not entradas(3)) or (entradas(0) and entradas(1) and not entradas(2));
-
-            codificacao(1) <= (not entradas(0) and not entradas(1) and entradas(2)) or (not entradas(2) and not entradas(3)) or (entradas(0) and entradas(1) and not entradas(2)) or (entradas(0) and entradas(1) and not entradas(3));
-
-            codificacao(2) <= (not entradas(0) and not entradas(1) and not entradas(3)) or (entradas(0) and entradas(2) and entradas(3)) or (not entradas(0) and not entradas(1) and entradas(3)) or (entradas(0) and not entradas(1) and not entradas(3));
-
-            codificacao(3) <= (not entradas(0) and entradas(1) and entradas(2) and entradas(3)) or (entradas(0) and not entradas(1) and entradas(3)) or (entradas(1) and not entradas(2) and not entradas(3)) or (not entradas(0) and not entradas(1) and not entradas(3)) or (not entradas(1) and entradas(2) and not entradas(3));
-
-                    if codificacao = pos_primeiroNavio then
+                    if entradas = pos_primeiroNavio then
                         primeiroNavioAtingido <= '1';
                         naviosPosicionados(0) <= '0';
-                    elsif codificacao = pos_segundoNavio then
+                    elsif entradas = pos_segundoNavio then
                         segundoNavioAtingido <= '1';
                         naviosPosicionados(1) <= '0';
                     else
