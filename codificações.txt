@@ -1,0 +1,8 @@
+-- Primeira Codificação
+D := (not entradas(0) and not entradas(1) and not entradas(2)) or (not entradas(1) and entradas(3)) or (not entradas(0) and entradas(1) and entradas(2) and not entradas(3)) or (entradas(0) and entradas(1) and not entradas(2));
+
+C := (not entradas(0) and not entradas(1) and entradas(2)) or (not entradas(2) and not entradas(3)) or (entradas(0) and entradas(1) and not entradas(2)) or (entradas(0) and entradas(1) and not entradas(3));
+
+B := (not entradas(0) and not entradas(1) and not entradas(3)) or (entradas(0) and entradas(2) and entradas(3)) or (not entradas(0) and not entradas(1) and entradas(3)) or (entradas(0) and not entradas(1) and not entradas(3));
+
+A := (not entradas(0) and entradas(1) and entradas(2) and entradas(3)) or (entradas(0) and not entradas(1) and entradas(3)) or (entradas(1) and not entradas(2) and not entradas(3)) or (not entradas(0) and not entradas(1) and not entradas(3)) or (not entradas(1) and entradas(2) and not entradas(3));

@@ -10,7 +10,8 @@ entity batalhaNaval is
         naviosPosicionados : out std_logic_vector(1 downto 0);
         vidas: out std_logic_vector(5 downto 0);
         ganhou : out std_logic;
-        perdeu : out std_logic
+        perdeu : out std_logic;
+        teste: out std_logic_vector(3 downto 0)
     );
 end batalhaNaval;
 
@@ -22,8 +23,13 @@ architecture arch of batalhaNaval is
     signal tentativas : integer range 0 to 6 := 0;
     signal primeiroNavioAtingido : std_logic := '0';
     signal segundoNavioAtingido : std_logic := '0';
+    signal codificacao : std_logic_vector(3 downto 0);
 begin
     process(reset, clock)
+            variable A : std_logic;
+            variable B : std_logic;
+            variable C : std_logic;
+            variable D : std_logic;
     begin
         if reset = '1' then
             y <= primeiroNavio;
@@ -56,10 +62,24 @@ begin
                         y <= segundoNavio;
                     end if;
                 when jogadas =>
-                    if entradas = pos_primeiroNavio then
+
+                    A := (not entradas(1) and entradas(3)) or (entradas(0) and entradas(1) and not entradas(2)) or (not entradas(0) and not entradas(1) and not entradas(2)) or (not entradas(0) and entradas(1) and entradas(2) and not entradas(3));
+
+                    B := (not entradas(2) and not entradas(3)) or (not entradas(0) and not entradas(1) and entradas(2)) or (entradas(0) and entradas(1) and not entradas(2)) or (entradas(0) and entradas(1) and not entradas(3));
+
+                    C := (not entradas(0) and not entradas(2) and not entradas(3)) or (not entradas(0) and not entradas(1) and entradas(3)) or ( entradas(0) and entradas(2) and entradas(3)) or (entradas(0) and not entradas(1) and not entradas(3));
+
+                    D := (entradas(1) and not entradas(2) and not entradas(3)) or (entradas(0) and not entradas(1) and entradas(3)) or (not entradas(0) and not entradas(1) and not entradas(3)) or (entradas(0) and not entradas(1) and entradas(2)) or (not entradas(0) and entradas(1) and entradas(2) and entradas(3));
+
+                    teste(3) <= A;
+                    teste(2) <= B;
+                    teste(1) <= C;
+                    teste(0) <= D;
+
+                    if (pos_primeiroNavio(3) = A and pos_primeiroNavio(2) = B and pos_primeiroNavio(1) = C and pos_primeiroNavio(0) = D) then
                         primeiroNavioAtingido <= '1';
                         naviosPosicionados(0) <= '0';
-                    elsif entradas = pos_segundoNavio then
+                    elsif (pos_segundoNavio(3) = A and pos_segundoNavio(2) = B and pos_segundoNavio(1) = C and pos_segundoNavio(0) = D) then
                         segundoNavioAtingido <= '1';
                         naviosPosicionados(1) <= '0';
                     else
