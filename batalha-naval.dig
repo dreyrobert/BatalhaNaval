@@ -30,7 +30,7 @@
         </entry>
         <entry>
           <string>externalInputs</string>
-          <string>clock,reset,entradas:4</string>
+          <string>clock,reset,entradas:4,sentido</string>
         </entry>
         <entry>
           <string>Width</string>
@@ -38,11 +38,11 @@
         </entry>
         <entry>
           <string>externalOutputs</string>
-          <string>naviosPosicionados:2,vidas:6,ganhou,perdeu</string>
+          <string>naviosPosicionados:3,vidas:6,ganhou,perdeu,teste:4</string>
         </entry>
         <entry>
           <string>CodeFile</string>
-          <file>C:\Users\dreyr\Desktop\workspace\batalha-naval\batalhaNaval.vhdl</file>
+          <file>C:\Users\dreyr\Desktop\workspace\BatalhaNaval\batalhaNaval.vhdl</file>
         </entry>
       </elementAttributes>
       <pos x="820" y="160"/>
@@ -57,7 +57,7 @@
       <elementAttributes>
         <entry>
           <string>Bits</string>
-          <int>2</int>
+          <int>3</int>
         </entry>
         <entry>
           <string>intFormat</string>
@@ -114,6 +114,25 @@
       <elementAttributes/>
       <pos x="1440" y="280"/>
     </visualElement>
+    <visualElement>
+      <elementName>In</elementName>
+      <elementAttributes/>
+      <pos x="540" y="340"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Out</elementName>
+      <elementAttributes>
+        <entry>
+          <string>intFormat</string>
+          <intFormat>bin</intFormat>
+        </entry>
+        <entry>
+          <string>Bits</string>
+          <int>4</int>
+        </entry>
+      </elementAttributes>
+      <pos x="1340" y="320"/>
+    </visualElement>
   </visualElements>
   <wires>
     <wire>
@@ -125,6 +144,14 @@
       <p2 x="1220" y="160"/>
     </wire>
     <wire>
+      <p1 x="1160" y="320"/>
+      <p2 x="1340" y="320"/>
+    </wire>
+    <wire>
+      <p1 x="1140" y="240"/>
+      <p2 x="1160" y="240"/>
+    </wire>
+    <wire>
       <p1 x="640" y="180"/>
       <p2 x="820" y="180"/>
     </wire>
@@ -133,16 +160,24 @@
       <p2 x="1360" y="180"/>
     </wire>
     <wire>
-      <p1 x="540" y="280"/>
-      <p2 x="820" y="280"/>
+      <p1 x="540" y="340"/>
+      <p2 x="800" y="340"/>
     </wire>
     <wire>
       <p1 x="1320" y="280"/>
       <p2 x="1440" y="280"/>
     </wire>
     <wire>
+      <p1 x="540" y="280"/>
+      <p2 x="660" y="280"/>
+    </wire>
+    <wire>
       <p1 x="1140" y="200"/>
       <p2 x="1340" y="200"/>
+    </wire>
+    <wire>
+      <p1 x="660" y="200"/>
+      <p2 x="820" y="200"/>
     </wire>
     <wire>
       <p1 x="540" y="220"/>
@@ -157,20 +192,32 @@
       <p2 x="1320" y="220"/>
     </wire>
     <wire>
+      <p1 x="800" y="220"/>
+      <p2 x="820" y="220"/>
+    </wire>
+    <wire>
       <p1 x="640" y="180"/>
       <p2 x="640" y="220"/>
+    </wire>
+    <wire>
+      <p1 x="800" y="220"/>
+      <p2 x="800" y="340"/>
     </wire>
     <wire>
       <p1 x="1220" y="140"/>
       <p2 x="1220" y="160"/>
     </wire>
     <wire>
-      <p1 x="820" y="200"/>
-      <p2 x="820" y="280"/>
+      <p1 x="660" y="200"/>
+      <p2 x="660" y="280"/>
     </wire>
     <wire>
       <p1 x="1320" y="220"/>
       <p2 x="1320" y="280"/>
+    </wire>
+    <wire>
+      <p1 x="1160" y="240"/>
+      <p2 x="1160" y="320"/>
     </wire>
     <wire>
       <p1 x="1340" y="200"/>
