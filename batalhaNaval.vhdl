@@ -34,7 +34,7 @@ begin
         if reset = '1' then
             y <= primeiroNavio;
             tentativas <= 0;
-            vidas <= (others => '1');
+            vidas <= (others => '0');
             ganhou <= '0';
             perdeu <= '0';
             primeiroNavioAtingido <= '0';
@@ -63,14 +63,14 @@ begin
                     end if;
                 when jogadas =>
 
-                    A := (not entradas(1) and entradas(3)) or (entradas(0) and entradas(1) and not entradas(2)) or (not entradas(0) and not entradas(1) and not entradas(2)) or (not entradas(0) and entradas(1) and entradas(2) and not entradas(3));
+                    A := ((not entradas(3) and not entradas(2) and not entradas(1)) or (not entradas(2) and entradas(0)) or (not entradas(3) and entradas(2) and entradas(1) and not entradas(0)) or ((entradas(3) and entradas(2)) and not entradas(1)));
 
-                    B := (not entradas(2) and not entradas(3)) or (not entradas(0) and not entradas(1) and entradas(2)) or (entradas(0) and entradas(1) and not entradas(2)) or (entradas(0) and entradas(1) and not entradas(3));
+                    B := ((not entradas(1) and not entradas(0)) or ((not entradas(3) and not entradas(2)) and entradas(1)) or ((entradas(3) and entradas(2)) and not entradas(1)) or ((entradas(3) and entradas(2)) and not entradas(0))) ;
 
-                    C := (not entradas(0) and not entradas(2) and not entradas(3)) or (not entradas(0) and not entradas(1) and entradas(3)) or ( entradas(0) and entradas(2) and entradas(3)) or (entradas(0) and not entradas(1) and not entradas(3));
+                    C := ((not entradas(3) and not entradas(1) and not entradas(0)) or (not entradas(2) and not entradas(1) and not entradas(0)) or ((not entradas(3) and not entradas(2)) and entradas(0)) or (entradas(3) and (not entradas(2) and not entradas(0))) or (entradas(3) and entradas(1) and entradas(0)));
 
-                    D := (entradas(1) and not entradas(2) and not entradas(3)) or (entradas(0) and not entradas(1) and entradas(3)) or (not entradas(0) and not entradas(1) and not entradas(3)) or (entradas(0) and not entradas(1) and entradas(2)) or (not entradas(0) and entradas(1) and entradas(2) and entradas(3));
-
+                    D := ((not entradas(3) and not entradas(2) and not entradas(0)) or ((not entradas(2) and not entradas(0)) and entradas(1)) or (entradas(2) and (not entradas(1) and not entradas(0))) or (not entradas(3) and (entradas(2) and entradas(1) and entradas(0))) or ((entradas(3) and entradas(0)) and not entradas(2)));
+                     
                     teste(3) <= A;
                     teste(2) <= B;
                     teste(1) <= C;
@@ -82,8 +82,11 @@ begin
                     elsif (pos_segundoNavio(3) = A and pos_segundoNavio(2) = B and pos_segundoNavio(1) = C and pos_segundoNavio(0) = D) then
                         segundoNavioAtingido <= '1';
                         naviosPosicionados(1) <= '0';
-                    else
-                        vidas(tentativas) <= '0';
+                    else 
+                        tentativas <= tentativas + 1; -- Incrementa o contador de tentativas
+                            if tentativas < 6 then
+                                vidas(tentativas) <= '0'; -- Decrementa uma vida
+                            end if;
                     end if;
                 when fimJogo =>
                     -- Nada a fazer aqui, o jogo acabou.
